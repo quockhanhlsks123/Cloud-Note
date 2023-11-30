@@ -123,7 +123,7 @@ function Archived({ data, handleDelNote, setArchivedData, toolsNote, clear }) {
   const [filteredData, setFilteredData] = useState(dataFilter);
 
   const [sortByLatest, setSortByLatest] = useState(true);
-  console.log(filteredData);
+  // console.log(filteredData);
 
   const handleOverlayClick = (event) => {
     const isInsideTabContext = event.target.closest(".tabbb");
@@ -216,11 +216,11 @@ function Archived({ data, handleDelNote, setArchivedData, toolsNote, clear }) {
   };
 
   const sortedAndFilteredData = filteredData.length > 0
-  ? filteredData.slice(-50).sort((a, b) => new Date(b.createAt) - new Date(a.createAt))
-  : dataFilter.slice(-50).sort((a, b) => new Date(b.createAt) - new Date(a.createAt));
-  console.log(dataFilter);
+    ? filteredData.slice(-50).sort((a, b) => new Date(b.createAt) - new Date(a.createAt))
+    : dataFilter.slice(-50).sort((a, b) => new Date(b.createAt) - new Date(a.createAt));
+  // console.log(dataFilter);
   const handleRefresh = () => {
-    handleSortByLatest(); 
+    handleSortByLatest();
   };
 
   return (
@@ -289,22 +289,22 @@ function Archived({ data, handleDelNote, setArchivedData, toolsNote, clear }) {
           >
             Sort By
           </Button>
-           <Button
-            className={classNames(classes.List,"sort-button-text")}
+          <Button
+            className={classNames(classes.List, "sort-button-text")}
             variant='outlined'
             sx={{
               color: "black",
               textTransform: "capitalize",
               borderRadius: "10px",
               borderColor: "black",
-              width: view && construct === "Refresh"? "100px" : "auto",
-              marginLeft:"20px",
+              width: view && construct === "Refresh" ? "100px" : "auto",
+              marginLeft: "20px",
               "&:hover": { borderColor: "black" },
             }}
             startIcon={construct === "Refresh" ? <LoopIcon /> : <LoopIcon />}
             onClick={handleRefresh}
           >
-   
+
           </Button>
           {isTabsOpen && (
             <div className='overlay' ref={overlayRef} onClick={handleOverlayClick}>
@@ -332,20 +332,20 @@ function Archived({ data, handleDelNote, setArchivedData, toolsNote, clear }) {
                     <div className='color green5'></div>
                     <div className='color purple'></div>
                   </TabPanel>
-                  
-                  
 
-                <TabPanel className="nn" value="2">
-                  <div className="custom-tab" onClick={handleSortByLatest}><AccessTimeIcon/> By lastest record</div>
-                  <div className="custom-tab" onClick={handleSortByOldest}><MoreTimeIcon/> By oldest record</div>
-                  {/* <div className="custom-tab" onClick={handleSortByAlphabetically}><SortByAlphaIcon/> By alphabetically</div> */}
-                  {/* <div className="custom-tab"><NotificationsActiveIcon/> By reminder time</div> */}
-                </TabPanel>
-                <TabPanel className="nn"  value="3">
-                <div className="custom-tab" onClick={() => handleToggleView("List")}><FormatListNumberedRtlIcon/> List</div>
-                <div className="custom-tab" onClick={() => handleToggleView("Grid")}><GridViewOutlined /> Grid</div>
 
-                </TabPanel>
+
+                  <TabPanel className="nn" value="2">
+                    <div className="custom-tab" onClick={handleSortByLatest}><AccessTimeIcon /> By lastest record</div>
+                    <div className="custom-tab" onClick={handleSortByOldest}><MoreTimeIcon /> By oldest record</div>
+                    {/* <div className="custom-tab" onClick={handleSortByAlphabetically}><SortByAlphaIcon/> By alphabetically</div> */}
+                    {/* <div className="custom-tab"><NotificationsActiveIcon/> By reminder time</div> */}
+                  </TabPanel>
+                  <TabPanel className="nn" value="3">
+                    <div className="custom-tab" onClick={() => handleToggleView("List")}><FormatListNumberedRtlIcon /> List</div>
+                    <div className="custom-tab" onClick={() => handleToggleView("Grid")}><GridViewOutlined /> Grid</div>
+
+                  </TabPanel>
 
                 </Box>
               </TabContext>

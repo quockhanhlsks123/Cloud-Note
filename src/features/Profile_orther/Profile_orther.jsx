@@ -25,7 +25,7 @@ function Profile_orther({ data, handleDelNote, setArchivedData, toolsNote }) {
     const api_profile = async () => {
       const reslut = await axios({
         method: "GET",
-        url: `http://14.225.7.221:18011/profile/${id}`,
+        url: `https://sakaivn.online/profile/${id}`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -349,8 +349,8 @@ function Profile_orther({ data, handleDelNote, setArchivedData, toolsNote }) {
                         index == 0
                           ? classes.styleFist
                           : index == lastindex
-                          ? classes.styleLast
-                          : "" + `${classes.wapper_content}`
+                            ? classes.styleLast
+                            : "" + `${classes.wapper_content}`
                       }
                     >
                       <h2>{index + 1}</h2>

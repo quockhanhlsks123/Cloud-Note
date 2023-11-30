@@ -80,14 +80,26 @@ export default function LandingPage() {
       })
       .then((notes) => setNewNotes(notes));
   }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      noteApi.getNumberNote().then((data) => {
+        setUserMostNote(data.data);
+      });
+    }, 5000)
+  }, [listUserMostNote]);
+
   // useEffect(() => {
   //   noteApi.getNumberNote().then((data) => {
   //     setUserMostNote(data.data);
   //   });
   // }, [listUserMostNote]);
+
+
   const changeTheme = (val) => {
     setTheme(val);
   };
+
+
 
   return (
     <div className={cx("wrapper", { light: theme })}>

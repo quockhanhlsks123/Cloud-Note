@@ -51,7 +51,9 @@ const noteApi = {
   },
   getNumberNote() {
     const url = "/numbernote";
-    return axiosClient.get(url);
+    return axiosClient.get(url, () => {
+      setTimeout(3000)
+    });
   },
 };
 

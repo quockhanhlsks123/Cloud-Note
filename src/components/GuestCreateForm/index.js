@@ -110,52 +110,57 @@ export default function GuestCreateForm({ clear }) {
       title,
       type,
     };
+
+    console.log("param: ", params)
     if (type === "image") params = { ...params, metaData };
+
     try {
       const res = await noteApi.createNote(user.id, params);
+      console.log("this is createNote:", user.id)
       const noteId = res.note.idNote;
       const shareLink = `http://samnotes.online/note/${noteId}`
       setShareLink(shareLink);
       enqueueSnackbar("Note was created successfully", { variant: "success" });
-      setIsNoteCreated(true); 
+      setIsNoteCreated(true);
     } catch (err) {
+      console.log("message: ", err.message)
       setError('Failed to create note. Please try again.');
-      enqueueSnackbar(err.message, { variant: "error" });
+      enqueueSnackbar(err, { variant: "error" });
     }
   };
 
-  
- const handleShare = async () => {
-  if (isNoteCreated) {
-    try {
-      
-      setIsSharePopupOpen(true);
-      setError('');  
-      
-    } catch (err) {
-      setError('Failed to create note. Please try again.');
-      enqueueSnackbar(err.message, { variant: "error" });
-      console.log(err)
+
+  const handleShare = async () => {
+    if (isNoteCreated) {
+      try {
+
+        setIsSharePopupOpen(true);
+        setError('');
+
+      } catch (err) {
+        setError('Failed to create note. Please try again.');
+        enqueueSnackbar(err.message, { variant: "error" });
+        console.log(err)
+      }
     }
+  };
+
+  const closeSharePopup = () => {
+    setIsSharePopupOpen(false);
   }
-};
 
-const closeSharePopup = () => {
-  setIsSharePopupOpen(false);
-}
+  const copyToClipboard = (text) => {
+    if (isNoteCreated) {
+      const el = document.createElement('textarea');
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
 
-const copyToClipboard = (text) => {
-  if(isNoteCreated) {
-    const el = document.createElement('textarea');
-    el.value = text;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-
-    enqueueSnackbar('Link copied to clipboard', { variant: 'success' });
-  }
-};
+      enqueueSnackbar('Link copied to clipboard', { variant: 'success' });
+    }
+  };
 
   const imageUpload = async (e) => {
     const files = e.target.files;
@@ -293,17 +298,17 @@ const copyToClipboard = (text) => {
           {isSharePopupOpen && (
             <div className={cx('popup-wrapper')}>
               <div className={cx('share-link')}>{shareLink}</div>
-              <Button 
+              <Button
                 style={{ marginRight: '10px', padding: '5px 10px', fontSize: '14px', borderRadius: '20px', color: '#000', backgroundColor: '#aaf', height: '40px' }}
-                classname={cx('copy-link')}   
+                classname={cx('copy-link')}
                 onClick={() => copyToClipboard(shareLink)}>
-                  copy
+                copy
               </Button>
-              <Button 
+              <Button
                 style={{ marginRight: '10px', padding: '5px 10px', fontSize: '14px', borderRadius: '20px', color: '#000', backgroundColor: '#aaf', height: '40px' }}
                 onClick={closeSharePopup}>Close</Button>
             </div>
-          )} 
+          )}
 
           <div className={cx("item")} onClick={() => setOpenLock(true)}>
             <div className={cx("icon")}>
