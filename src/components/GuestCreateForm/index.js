@@ -52,6 +52,8 @@ export default function GuestCreateForm({ clear }) {
   const [color, setColor] = useState("color_1");
   const [data, setData] = useState("");
   const [metaData, setMetaData] = useState("");
+  const [idFolder, setIdFolder] = useState("1")
+  const [linkNoteShare, setLinkNoteShare] = useState("")
 
   const [dueAt, setDueAt] = useState(null);
   const [reminder, setReminder] = useState(null);
@@ -109,6 +111,8 @@ export default function GuestCreateForm({ clear }) {
       share,
       title,
       type,
+      idFolder,
+      linkNoteShare
     };
 
     console.log("param: ", params)
